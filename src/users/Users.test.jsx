@@ -1,9 +1,10 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Users from './Users';
-import UserDetailPage from '../pages/UserDetailPage';
 import axios from 'axios';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
+import AppRouter from '../router/AppRouter';
+import { renderWithRouter } from '../tests/helpers/renderWithRouter';
 
 jest.mock('axios');
 
@@ -35,11 +36,7 @@ describe('USERS TEST', () => {
 
   test('GET USERS', async () => {
     axios.get.mockReturnValue(response);
-    render(
-      <MemoryRouter>
-        <Users />
-      </MemoryRouter>
-    );
+    renderWithRouter(<Users />);
     const users = await screen.findAllByTestId('user-item');
     expect(users.length).toBe(3);
     expect(axios.get).toBeCalledTimes(1);
@@ -49,11 +46,9 @@ describe('USERS TEST', () => {
   test('TEST REDIRECT TO DETAILS PAGE', async () => {
     axios.get.mockReturnValue(response);
     render(
-      <MemoryRouter initialEntries={['/users']}>
-        <Routes>
-          <Route path="/users" element={<Users />} />
-          <Route path="/users/:id" element={<UserDetailPage />} />
-        </Routes>
+      <MemoryRouter>
+        <AppRouter />
+        <Users />
       </MemoryRouter>
     );
 
