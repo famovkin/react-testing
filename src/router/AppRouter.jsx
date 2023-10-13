@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Users from '../users/Users';
+import Users from '../components/users/Users';
 import MainPage from '../pages/MainPage';
 import AboutPage from '../pages/AboutPage';
 import UserDetailPage from '../pages/UserDetailPage';

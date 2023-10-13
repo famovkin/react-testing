@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 import Users from './Users';
 import axios from 'axios';
 import { MemoryRouter } from 'react-router-dom';
-import AppRouter from '../router/AppRouter';
-import { renderWithRouter } from '../tests/helpers/renderWithRouter';
+import AppRouter from '../../router/AppRouter';
+import { renderWithRouter } from '../../tests/helpers/renderWithRouter';
 
 jest.mock('axios');
 
